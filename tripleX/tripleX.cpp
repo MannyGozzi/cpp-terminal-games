@@ -1,11 +1,14 @@
 #include <iostream>
 
-void PrintIntroduction() {
+void PrintIntroduction(int difficulty) {
     std::cout << "You need to get a steak from the freezer.";
-    std::cout << "\nYou need to enter the correct combo to get into the freezer.";
+    std::cout << "\nYou need to enter the correct combo to get into a level " << difficulty << " freezer.";
 }
 
-void PlayGame() {
+bool PlayGame(int difficulty) {
+
+    PrintIntroduction(difficulty);
+
     // Declare 3 number code
     const int codeA = 5;
     const int codeB = 3;
@@ -28,18 +31,28 @@ void PlayGame() {
 
     if(guessSum == codeSum && guessProduct == codeProduct) {
         std::cout << "========YOU WIN!========\n   THE STEAK IS YOURS";
+        return true;
     } else {
         std::cout << "========YOU LOST========";
+        return false;
     }
     std::cout << "\nPress \"ctrl\" + \"c\" to quit\n\n\n\n";
 }
 
 int main() {
-    PrintIntroduction();
+    int levelDifficulty = 1;
+    PrintIntroduction(levelDifficulty);
+
     while(true) {
-        PlayGame();
+        bool levelComplete = PlayGame(levelDifficulty);
         std::cin.clear();
         std::cin.ignore();
+
+        if (levelComplete)
+        {
+            ++levelDifficulty;
+        }
+        
     }
 
     return 0;
