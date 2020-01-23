@@ -39,21 +39,24 @@ bool PlayGame(int difficulty) {
     std::cout << "\nPress \"ctrl\" + \"c\" to quit\n\n\n\n";
 }
 
-int main() {
+int main() {        // loop game until all levels are completed
     int levelDifficulty = 1;
-    PrintIntroduction(levelDifficulty);
+    const int maxDifficulty = 5;
 
-    while(true) {
+    while(levelDifficulty <= maxDifficulty) {
         bool levelComplete = PlayGame(levelDifficulty);
         std::cin.clear();
         std::cin.ignore();
 
         if (levelComplete)
         {
+            std::cout << "\nWell done, you have extracted the steak from the freezer!\n\n\n\n";
             ++levelDifficulty;
+        } else {
+            levelDifficulty = 1;
         }
         
     }
-
+    std::cout << "\nCONGRATULATIONS, YOU BEAT THE GAME!";
     return 0;
 }
